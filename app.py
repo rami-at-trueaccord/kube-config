@@ -1,10 +1,20 @@
+import ntpath
+
 import boto3
+from configparser import ConfigParser
 from helpers import ColorMe
+from os import path
 import yaml
 
-PROFILE = 'prod-admin'
-API_VERSION = 'client.authentication.k8s.io/v1alpha1'
-OUTPUT_PATH = '/Users/rhusein/Development/Utility-Scripts/kube-config/output.yaml'
+PROJECT_ROOT = path.dirname(path.abspath(__file__))
+
+config = ConfigParser()
+config_path = path.join(PROJECT_ROOT, 'config/config.ini')
+print(f"Path is {config_path}")
+config.read(config_path)
+PROFILE = config.get('default', 'PROFILE')
+API_VERSION = config.get('default', 'API_VERSION')
+OUTPUT_PATH = config.get('default', 'OUTPUT_PATH')
 
 
 def current_config():
@@ -84,7 +94,7 @@ for cluster in response['clusters']:
 
     # Print completeness percent because why not?
     count += 1
-    percent = round((count / len(response['clusters']))*100)
+    percent = round((count / len(response['clusters'])) * 100)
     if percent < 100:
         print(f"{percent}% complete", end='\r')
     else:
