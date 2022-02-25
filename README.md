@@ -5,8 +5,9 @@
 
 ## How to run:
 #### - Prerequisites
-1) Ensure you have the AWS DevOpsRole
-2) Ensure you have aws profile `[profile prod-admin]` setup in `~/.aws/credentials` (required for the boto3 session)
+1) You have the AWS DevOpsRole
+2) You have aws profile `[profile prod-admin]` configured in `~/.aws/credentials` (required for the boto3 session)
+3) You are connected to the Eng VPN
 
 #### - Setup
 1) Edit `kube-config/config/config.ini` properties accordingly
